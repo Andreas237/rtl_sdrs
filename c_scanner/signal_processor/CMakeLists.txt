@@ -1,0 +1,1 @@
+target_sources(scanner PRIVATE test_processor.cpp test_processor.hpp)
