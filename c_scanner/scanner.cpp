@@ -6,6 +6,8 @@
 
 #include "signal_processor/test_processor.hpp"
 #include "rtl_proxy/test_rtl_proxy.hpp"
+#include "rtl_proxy/rtl_proxy.hpp"
+
 
 using namespace std;
 using namespace arma;
@@ -21,5 +23,8 @@ int main(void){
 
     Test_Rtl_Proxy rtls;
     rtls.test_rtl_proxy();
+
+    RtlProxy rtlp;
+
     return 0;
 }

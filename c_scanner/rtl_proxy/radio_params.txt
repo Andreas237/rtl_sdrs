@@ -1,0 +1,4 @@
+frequency_min   500000
+frequency_max   1700000000
+bandwidths  240000  320000
+samplerates 240000   320000
