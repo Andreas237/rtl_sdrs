@@ -3,12 +3,19 @@
 #include <fstream>
 #include <iostream>
 
+#include "rtl-sdr.h"
+
 RtlProxy::RtlProxy() {
     read_config_file("../rtl_proxy/radio_params.txt");
     std::cout << 
     "min freq:\t" << this->frequency_range_min <<
     std::endl << 
     "max freq:\t" << this->frequency_range_max <<
+    std::endl;
+
+    std::cout << "Found " << 
+    rtlsdr_get_device_count() << 
+    " rtl sdrs connected to this computer" << 
     std::endl;
 }
 

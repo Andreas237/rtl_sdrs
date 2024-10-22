@@ -2,6 +2,10 @@ cmake_minimum_required(VERSION 3.20)
 project(rtl_scanner LANGUAGES CXX)
 
 add_executable(scanner)
+
+find_package(PkgConfig REQUIRED)
+
+
 target_sources(scanner PRIVATE "scanner.cpp")
 
 target_include_directories(scanner PRIVATE "${PROJECT_SOURCE_DIR}")
@@ -12,5 +16,10 @@ add_subdirectory("signal_processor")
 find_package(Armadillo REQUIRED)  # Find Armadillo (report error if not found)
 include_directories(${ARMADILLO_INCLUDE_DIRS})  # Add Armadillo include paths
 target_link_libraries(scanner ${ARMADILLO_LIBRARIES})  # Link against Armadillo libraries
+
+pkg_check_modules(RTLSDR REQUIRED librtlsdr)
+# find_package(RTLSDR REQUIRED librtlsdr)
+include_directories(${RTLSDR_INCLUDE_DIRS})
+target_link_libraries(scanner ${RTLSDR_LIBRARIES})
 
 install(TARGETS scanner)
