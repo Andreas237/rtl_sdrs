@@ -4,6 +4,8 @@
 #define RTLOUTBUFSZ 1024
 #define INTRATE 12500
 #define MAXNBCHANNELS 16
+#define DEFAULT_BUFFER_SIZE 16384    // Buffer size for reading samples
+
 #define DEFAULT_FREQUENCY 131825000
 #define DEFAULT_GAIN 5
 #define DEFAULT_PPM 0

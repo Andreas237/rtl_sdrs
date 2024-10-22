@@ -2,6 +2,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <unistd.h>
 
 #include <spdlog/spdlog.h>
 
@@ -30,6 +31,13 @@ int nearest_gain(int target_gain)
 	}
 	delete gains;
 	return close_gain;
+}
+
+
+// Callback function to handle the samples
+void rtlsdr_read_callback(unsigned char* buf, uint32_t len) {
+    // TODO: Process the samples rather than just printing
+    spdlog::debug("Received ",len," bytes of samples.");
 }
 
 
@@ -117,6 +125,10 @@ bool RtlProxy::rtl_sdr_collector(float freq, float sample_rate) {
         spdlog::debug("Frequency corrected by ",ppm," ppm");
     }
     
+    if (rtlsdr_read_async(dev, rtlsdr_read_callback, (void *)0, 0, DEFAULT_BUFFER_SIZE) != 0){
+        spdlog::error("Failed to set callback function for RTL-SDR samples");
+        return false;
+    }
 
     rtlsdr_reset_buffer(dev);
 
