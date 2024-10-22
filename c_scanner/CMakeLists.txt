@@ -18,8 +18,10 @@ include_directories(${ARMADILLO_INCLUDE_DIRS})  # Add Armadillo include paths
 target_link_libraries(scanner ${ARMADILLO_LIBRARIES})  # Link against Armadillo libraries
 
 pkg_check_modules(RTLSDR REQUIRED librtlsdr)
-# find_package(RTLSDR REQUIRED librtlsdr)
 include_directories(${RTLSDR_INCLUDE_DIRS})
 target_link_libraries(scanner ${RTLSDR_LIBRARIES})
+
+find_package(spdlog REQUIRED)
+target_link_libraries(scanner spdlog::spdlog_header_only)
 
 install(TARGETS scanner)
